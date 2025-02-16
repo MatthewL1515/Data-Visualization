@@ -1,14 +1,17 @@
 // Variables
+const majorURL = "https://raw.githubusercontent.com/fivethirtyeight/data/refs/heads/master/college-majors/all-ages.csv"
+
+let majorsTable
 
 
 // ____________________________________________________________
 
 function preload() {
-  weatherJSON = loadJSON() // Put in raw CSV here
+  majorsTable = loadTable(majorsURL, 'csv', 'header')
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(600, 400);
 }
 
 function draw() {

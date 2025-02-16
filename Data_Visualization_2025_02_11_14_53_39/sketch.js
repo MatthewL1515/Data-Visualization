@@ -2,9 +2,10 @@
 // Variables
 // ____________________________________________________________
 
-const majorURL = "https://raw.githubusercontent.com/fivethirtyeight/data/refs/heads/master/college-majors/all-ages.csv"
+const majorsURL = "https://raw.githubusercontent.com/fivethirtyeight/data/refs/heads/master/college-majors/all-ages.csv"
 
 let majorsTable
+let selectedMajors = []
 
 // ____________________________________________________________
 // ____________________________________________________________
@@ -21,6 +22,7 @@ function preload() {
 
 function setup() {
   createCanvas(600, 400);
+  
 }
 
 // ____________________________________________________________

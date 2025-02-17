@@ -22,6 +22,9 @@ function preload() {
 
 function setup() {
   createCanvas(600, 400);
+  textSize(12)
+  textAlign( CENTER,CENTER)
+  noLoop()
   
 }
 
@@ -32,6 +35,13 @@ function setup() {
 
 function draw() {
   background(220);
+  
+  let barWidth = width/ (selectedMajors.length * 2)
+  
+  let maxRate = 0
+  for (let i = 0; i < selectedMajors.length; i++) {
+    if (selectedMajors[i].
+  }
 }
 
 // ____________________________________________________________

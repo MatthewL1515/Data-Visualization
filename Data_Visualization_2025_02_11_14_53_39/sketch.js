@@ -36,15 +36,17 @@ function setup() {
 function draw() {
   background(220);
   
-  let barWidth = width/ (selectedMajors.length * 2)
-  
-  let maxRate = 0
-  for (let i = 0; i < selectedMajors.length; i++) {
-    if (selectedMajors[i].
-  }
+  drawTitle()
 }
 
 // ____________________________________________________________
 // All Other Functions Go Below
 // ____________________________________________________________
 
+// ____________________________________________________________
+// Title Function
+
+function drawTitle() {
+  textSize(18)
+  text("Employment Rate by Major", width/2, 30)
+}

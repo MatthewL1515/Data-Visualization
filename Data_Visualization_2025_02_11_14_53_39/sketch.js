@@ -21,7 +21,7 @@ function preload() {
 // ____________________________________________________________
 
 function setup() {
-  createCanvas(600, 400);
+  createCanvas(600, 500);
   textSize(12)
   textAlign( CENTER,CENTER)
   noLoop()
@@ -37,6 +37,7 @@ function draw() {
   background(220);
   
   drawTitle()
+  drawAxes()
 }
 
 // ____________________________________________________________
@@ -49,4 +50,16 @@ function draw() {
 function drawTitle() {
   textSize(18)
   text("Employment Rate by Major", width/2, 30)
+}
+// ____________________________________________________________
+// Axes Lines
+
+function drawAxes() {
+  stroke(0)
+  
+  // X-axis line
+  line(50, 350, width - 50, 350)
+  
+  // Y Axis Line
+  line(50, 350, 50, 50)
 }

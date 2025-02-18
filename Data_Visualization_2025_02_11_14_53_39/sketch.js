@@ -9,6 +9,7 @@ let currentIndex = 0
 let barWidth
 let maxHeight = 300 // tentative, can be changed as needed
 let dx
+let c = 50
 
 // ____________________________________________________________
 // Preload Function
@@ -20,7 +21,7 @@ function preload() {
 // Setup Function
 
 function setup() {
-  createCanvas(600, 500);
+  createCanvas(600, 450);
   textSize(12)
   textAlign( CENTER,CENTER)
   noLoop()
@@ -58,10 +59,10 @@ function drawAxes() {
   stroke(0)
   
   // X-axis line
-  line(50, 350, width - 100, 350)
+  line(100, 350, width - 50, 350)
   
   // Y Axis Line
-  line(50, 350, 50, 50)
+  line(100, 350, 100, 50)
 }
 // ____________________________________________________________
 // Y-axis Label
@@ -69,7 +70,7 @@ function drawAxes() {
 function YAxisLabel() {
   push()
   textSize(14)
-  translate(30, height / 2 - 50)
+  translate(80, height / 2 - c)
   rotate(-PI/2)
   text("Employed Rate (%)", 0, 0)
   pop()
@@ -116,18 +117,18 @@ function drawBars() {
     fill(colorValue, 150, 255 - colorValue)
     
     // Draw bar as rectangle
-    rect(cx - barWidth / 2, xAxisPos - barHeight, barWidth, barHeight)
+    rect(cx - barWidth / 2 + c, xAxisPos - barHeight, barWidth, barHeight)
     
     // Draw employment rate
     fill(0)
     textSize(10)
-    text(Math.round(selectedRates[i]) + "%", cx, xAxisPos - barHeight - 15)
+    text(Math.round(selectedRates[i]) + "%", cx + c, xAxisPos - barHeight - 15)
     
     // Major name, wrapped function
     fill(0)
     textAlign(CENTER, TOP)
     let maxWidth = barWidth - 10
     textWrap(WORD)
-    text(selectedMajors[i], cx - 15, xAxisPos + 5, maxWidth)
+    text(selectedMajors[i], cx + 35, xAxisPos + 5, maxWidth)
   }
 }

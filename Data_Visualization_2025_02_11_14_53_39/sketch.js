@@ -10,6 +10,7 @@ let barWidth
 let maxHeight = 300 // tentative, can be changed as needed
 let dx
 let c = 50
+let xAxisPos = 350
 
 // ____________________________________________________________
 // Preload Function
@@ -24,7 +25,6 @@ function setup() {
   createCanvas(600, 450);
   textSize(12)
   textAlign( CENTER,CENTER)
-  noLoop()
   pickNextMajors()
   
 }
@@ -39,6 +39,7 @@ function draw() {
   drawAxes()
   YAxisLabel()
   drawBars(dx, barWidth)
+  barHover(dx, barWidth)
 }
 
 // ____________________________________________________________
@@ -50,7 +51,7 @@ function draw() {
 
 function drawTitle() {
   textSize(18)
-  text("Employment Rate by Major", width/2, 30)
+  text("Employment Rate by Major (2010-2012)", width/2, 30)
 }
 // ____________________________________________________________
 // Axes Lines
@@ -92,12 +93,9 @@ function pickNextMajors() {
       
       selectedMajors.push(majorsTable.getString(i, "Major"))
       selectedRates.push(employmentRate)
+      
     }
   }
-
-  // Goes to the next five majors
-  // % is there so that if it goes over the number of majors, it loops back to the starting point
-  currentIndex = (currentIndex + 5) % majorsTable.getRowCount()
 }
 
 // ____________________________________________________________
@@ -106,7 +104,6 @@ function pickNextMajors() {
 function drawBars() {
   dx = width / (selectedMajors.length + 2)
   barWidth = dx * 0.5
-  let xAxisPos = 350
   
   for(let i = 0; i < selectedMajors.length; i++) {
     let cx = dx * (i + 1)
@@ -131,4 +128,44 @@ function drawBars() {
     textWrap(WORD)
     text(selectedMajors[i], cx + 35, xAxisPos + 5, maxWidth)
   }
+}
+
+
+// ____________________________________________________________
+// Bar Hover function
+function barHover(dx, barWidth) {
+   for (let i = 0; i < selectedMajors.length; i++) {
+    let cx = dx * (i + 1) // Position of the bar
+    let barHeight = map(selectedRates[i], 0, 100, 0, maxHeight)
+    
+    // Position Check
+    if(mouseX > cx - barWidth / 2 + c && mouseX < cx + barWidth / 2 + c && mouseY > xAxisPos - barHeight && mouseY < xAxisPos) {
+      
+      let totalGrads = int(majorsTable.getString(i + currentIndex, "Total"))
+      let totalEmployed = int(majorsTable.getString(i + currentIndex, "Employed"))
+      
+      fill(0)
+      textSize(10)
+      text(`Total Graduates: ${totalGrads}`, mouseX, mouseY - 20)
+      text(`Employed Graduates: ${totalEmployed}`, mouseX, mouseY)
+      
+      }
+    }
+}
+
+// ____________________________________________________________
+// Switch along index (keypress, left and right button)
+
+function keyPressed() {
+  if(keyCode === RIGHT_ARROW) {
+    currentIndex = (currentIndex + 5) % majorsTable.getRowCount()
+    pickNextMajors()
+  }
+  
+  else if(keyCode === LEFT_ARROW) {
+    currentIndex = (currentIndex - 5 + majorsTable.getRowCount()) % majorsTable.getRowCount()
+    pickNextMajors()
+  }
+  
+  redraw()
 }

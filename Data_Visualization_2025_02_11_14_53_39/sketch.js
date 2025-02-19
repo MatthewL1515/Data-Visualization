@@ -22,7 +22,7 @@ function preload() {
 // Setup Function
 
 function setup() {
-  createCanvas(600, 450);
+  createCanvas(600, 500);
   textSize(12)
   textAlign( CENTER,CENTER)
   pickNextMajors()
@@ -40,6 +40,7 @@ function draw() {
   YAxisLabel()
   drawBars(dx, barWidth)
   barHover(dx, barWidth)
+  drawLegend()
 }
 
 // ____________________________________________________________
@@ -168,4 +169,30 @@ function keyPressed() {
   }
   
   redraw()
+}
+
+// ____________________________________________________________
+// Draw a Legend
+// Legend contains: Tells Red to Blue, and Key Controls
+
+function drawLegend() {
+  let legendX = 100;
+  let legendY = height - 50;
+
+  // Draw legend box
+  noFill()
+  rect(legendX - 70, legendY - 40, legendX + 100, 80)
+  
+  // Draw Color Legend
+  textSize(10)
+  fill(0)
+  text("Red = Low %", legendX - 30, legendY)
+  text("Blue = High %", legendX - 30, legendY - 20)
+  
+  // Draw Control instructions
+  text("Left and right to control data", legendX, legendY + 20)
+  
+  // Legend Title
+  textSize(12)
+  text("Legend", legendX - 40, legendY - 35)
 }

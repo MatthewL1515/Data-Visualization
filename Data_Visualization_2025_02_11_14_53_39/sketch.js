@@ -189,7 +189,7 @@ function drawLegend() {
   text("Blue = High %", legendX - 30, legendY - 20)
   
   // Draw Control instructions
-  text("Left and right to control data", legendX, legendY + 20)
+  text("Left and right arrows to control data", legendX + 15, legendY + 20)
   
   // Legend Title
   textSize(12)

@@ -122,11 +122,10 @@ function drawBars() {
     textSize(10)
     text(Math.round(selectedRates[i]) + "%", cx + c, xAxisPos - barHeight - 15)
     
-    // Major name, wrapped function
+    // Major name, wrapped function (is the last part of the text function)
     fill(0)
     textAlign(CENTER, TOP)
     let maxWidth = barWidth - 10
-    textWrap(WORD)
     text(selectedMajors[i], cx + 35, xAxisPos + 5, maxWidth)
   }
 }

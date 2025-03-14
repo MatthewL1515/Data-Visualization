@@ -23,12 +23,13 @@ class BarGraph {
 
   updateData(newData) {
     this.data = newData
+    adjustCanvasSize(this.data.length)
     redraw()
   }
   
   addData() {
-    this.data.push({major: label, rate: value, total: total})
-    this.updateData(this.data)
+    this.data.push({major, rate, total})
+    redraw()
   }
   
   // ____________________________________________________________
@@ -168,7 +169,6 @@ function setup() {
   createCanvas(baseCanvasWidth, 600)
   textSize(12)
   textAlign( CENTER,CENTER)
-  
   let initialData = allData.slice(0,5)
   graph = new BarGraph(50, 50, baseCanvasWidth - 100, 400, allData.slice(0,5))
   
@@ -205,5 +205,13 @@ function keyPressed() {
       currentIndex = (currentIndex - 5 + allData.length) % allData.length
     }
     graph.updateData(allData.slice(currentIndex,currentIndex + 5))
+  }
+}
+
+function adjustCanvasSize(numBars) {
+  let requiredWidth = 100 + numBars * 80
+  if (requiredWidth > width) {
+    resizeCanvas(requiredWidth, height)
+    graph.width = requiredWidth - 100
   }
 }

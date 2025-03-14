@@ -23,13 +23,16 @@ class BarGraph {
 
   updateData(newData) {
     this.data = newData
-    adjustCanvasSize(this.data.length)
     redraw()
   }
   
   addData(major, rate, total) {
-    this.data.push({major, rate, total})
-    redraw()
+    let nextMajor = allData[this.data.length]
+    if (nextMajor) {
+      this.data.push(nextMajor)
+      adjustCanvasSize(this.data.length)
+      redraw()
+    }
   }
   
   // ____________________________________________________________
@@ -204,11 +207,15 @@ function keyPressed() {
   if(allData.length >= 5) {
     if (keyCode === RIGHT_ARROW) {
       currentIndex = (currentIndex + 5) % allData.length
+      graph.updateData(allData.slice(currentIndex,currentIndex + 5))
     }
     else if (keyCode === LEFT_ARROW) {
       currentIndex = (currentIndex - 5 + allData.length) % allData.length
+      graph.updateData(allData.slice(currentIndex,currentIndex + 5))
     }
-    graph.updateData(allData.slice(currentIndex,currentIndex + 5))
+    else if (key === " ") {
+      graph.addData()
+    }
   }
 }
 

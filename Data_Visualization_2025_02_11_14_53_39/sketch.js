@@ -27,7 +27,7 @@ class BarGraph {
     redraw()
   }
   
-  addData() {
+  addData(major, rate, total) {
     this.data.push({major, rate, total})
     redraw()
   }
@@ -78,7 +78,7 @@ class BarGraph {
   drawBars() {
     
     let xAxisPos = this.y + this.height - 50
-    let dx = (this.width / (this.data.length + 2)) + 20
+    let dx = ((this.width - 100) / (this.data.length + 1))
     let barWidth = dx * 0.5
     
     for (let i = 0; i < this.data.length; i++) {
@@ -98,9 +98,13 @@ class BarGraph {
       text(Math.round(this.data[i].rate) + "%", cx, xAxisPos - barHeight - 15)
     
       // Major name, wrapped function (is the last part of the text function)
+      push()
       fill(0)
-      textAlign(CENTER, TOP)
-      text(this.data[i].major, cx - 5, xAxisPos + 10, barWidth - 30)
+      textAlign(CENTER, CENTER)
+      translate(cx, xAxisPos + 30)
+      rotate(-PI / 2)
+      text(this.data[i].major, 0, 0)
+      pop()
     }
  }
   
@@ -130,8 +134,8 @@ class BarGraph {
   
    // Draw Legend
   drawLegend() {
-    let legendX = this.x + 20
-    let legendY = this.y + this.height - 40
+    let legendX = this.x - 40
+    let legendY = this.y + this.height - 500
     
     textAlign(LEFT, TOP)
     noFill()

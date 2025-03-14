@@ -61,7 +61,7 @@ class BarGraph {
   drawAxes() {
     stroke(0)
     // X-axis line
-    line(this.x + 50, this.y + this.height - 50, this.x + this.width - 10, this.y + this.height - 50)
+    line(this.x + 50, this.y + this.height - 50, this.x + this.width - 100, this.y + this.height - 50)
   
     // Y Axis Line
     line(this.x + 50, this.y + 50, this.x + 50, this.y + this.height - 50)

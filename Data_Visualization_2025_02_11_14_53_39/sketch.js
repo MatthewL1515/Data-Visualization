@@ -5,6 +5,8 @@ const majorsURL = "https://raw.githubusercontent.com/fivethirtyeight/data/refs/h
 let allData = []
 let currentIndex = 0
 let graph
+let baseCanvasWidth = 700
+let maxBarsBeforeExpand = 10
 
 // ____________________________________________________________
 // Class Specifications
@@ -163,12 +165,12 @@ function processData(table) {
 // Setup Function
 
 function setup() {
-  createCanvas(600, 500)
+  createCanvas(baseCanvasWidth, 600)
   textSize(12)
   textAlign( CENTER,CENTER)
   
   let initialData = allData.slice(0,5)
-  graph = new BarGraph(50, 50, 500, 350, initialData)
+  graph = new BarGraph(50, 50, baseCanvasWidth - 100, 400, allData.slice(0,5))
   
   if (allData.length >= 5) {
     graph.updateData(allData.slice(0,5))
